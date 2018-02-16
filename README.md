@@ -26,7 +26,7 @@
 - jQuery events
   - 'Binding' events to elements
   - Asynchronous behavior (just like ajax)
-- [Lab 2](lab/)
+- [Lab](lab/)
 
 ## Homework Assignment
 

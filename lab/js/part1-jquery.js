@@ -25,8 +25,9 @@ var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/ton
 
   A few reminders about the basic forms of CSS selector:
   1. The simplest selector case is specification of an element's name directly. The selector "p" will grab all
-     <p> elements whereas "h1" will grab all <h1> elements.
+     <p> elements whereas "h1" will grab all <h1> elements.*/
 
+/*
   2. An HTML element's "class" is referenced through a prefixed period. A page that has multiple movie
      div elements in which there is a title header might look like this:
      <div>
@@ -93,21 +94,49 @@ var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/ton
     Try to imagine a single object that you're describing. For example, if your object is "person",
     you might want to include a name, an address, an age, a couple of boolean characteristics, and a
     favorite color. Don't spend too much time on thinking about the perfect object to represent with
-    this form, just about anything will do.
-
-  Task 2: Setting (writing) input values
+    this form, just about anything will do.*/
+$("#main-heading").text("Bike sharing stations")
+$("#text-label1").text("Station ID")
+$("#text-label2").text("Tract ID")
+$("#text-label3").text("Station name")
+$("#number-label").text("Stack number")
+$("#checkbox-label1").text("Under repair")
+$("#checkbox-label2").text("Empty")
+$("#color-label").text("Color")
+  /*Task 2: Setting (writing) input values
     *NOTE*: An input's value is not the same as an HTML element's text. We use $(selector).val() as
             opposed to $(selector).text() in this case.
 
     Fill out the input form with some imagined values. If you chose to make the form about the
     properties of people, the name might be 'bob' and the favorite color could be green (hint: you'll
     want to get formatting exactly right to set a color field; experiment in the console to see what
-    the color you'll specify should look like).
+    the color you'll specify should look like).*/
+    $("#text-input1").val("1234");
+    $("#text-input2").val("1234567890");
+    $("#text-input3").val("Van Pelt");
+    $("#numeric-input").val(10);
+    $("#color-input").val('#a6ff00');
 
-  Task 3: Getting (reading) input values
+/*  Task 3: Getting (reading) input values
     Write the code necessary to read from your input form and return a javascript object (with keys
     to clarify the meaning of each value) that has all the data that's stored in your form.
-
+    $("#text-label1").text("Station ID")
+    $("#text-label2").text("Tract ID")
+    $("#text-label3").text("Station name")
+    $("#number-label").text("Stack number")
+    $("#checkbox-label1").text("Under repair")
+    $("#checkbox-label2").text("Empty")
+    $("#color-label").text("Color")*/
+    var object = {
+    station_id:$("#text-input1").val(),
+    tract_id:$("#text-input2").val(),
+    station_name:$("#text-input3").val(),
+    stack_number:$("#numeric-input").val(),
+    Repair:$("#cbox-input1").val(),
+    Empty:$("#cbox-input2").val(),
+    Color:$("#color-input").val()
+    };
+  /*
   Task 4: Enable user interaction with the form
     At this point, we're really only using HTML input fields as a kind of storage. We create some data,
     put that data on the DOM, and read it back out. What we really want to do is interact with the
@@ -126,7 +155,22 @@ var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/ton
     $('#someInput').prop('disabled', true);  -> <input id="someInput" type="number" disabled>
 
     Enable *all* fields on this form.
+    station_id:$("#text-input1").val(),
+    tract_id:$("#text-input2").val(),
+    station_name:$("#text-input3").val(),
+    stack_number:$("#numeric-input").val(),
+    Repair:$("#cbox-input1").val(),
+    Empty:$("#cbox-input2").val(),
+    Color:$("#color-input").val()*/
 
+$("#text-input1").prop('disabled', false);
+$("#text-input2").prop('disabled', false);
+$("#text-input3").prop('disabled', false);
+$("#numeric-input").prop('disabled', false);
+$("#cbox-input1").prop('disabled', false);
+$("#cbox-input2").prop('disabled', false);
+$("#color-input").prop('disabled', false);
+/*
   Task 5: Add a button trigger to log this form's object to console
     We now can enter data through the HTML and create an object to represent that data. Add a button
     click event to the button at the bottom of your form. This means that we want to use jQuery to
@@ -138,13 +182,42 @@ var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/ton
 
     P.S. Checkboxes might confuse you. Try to use google to figure out what's going wrong.
 
+    Enable *all* fields on this form.
+    station_id:$("#text-input1").val(),
+    tract_id:$("#text-input2").val(),
+    station_name:$("#text-input3").val(),
+    stack_number:$("#numeric-input").val(),
+    Repair:$("#cbox-input1").val(),
+    Empty:$("#cbox-input2").val(),
+    Color:$("#color-input").val()*/
+    $( "#target" ).click(function() {
+      console.log({station_id:$("#text-input1").val(),
+      tract_id:$("#text-input2").val(),
+      station_name:$("#text-input3").val(),
+      stack_number:$("#numeric-input").val(),
+      Repair:$("#cbox-input1").val(),
+      Empty:$("#cbox-input2").val(),
+      Color:$("#color-input").val()
+      })
+      })
+/*
   Task 6: Plot input data to the map on button click
     Modify this form to include at least a lat (number), long (number), description (text), and
     color (color) inputs. With these inputs you should be able to plot a circle marker
     (http://leafletjs.com/reference.html#circlemarker) to the lat/long on the form, with the color
-    provided, and a bound popup which gives you the description.
+    provided, and a bound popup which gives you the description.*/
+$("#text-label1").text("Lat");
+$("#text-input1").attr('type', 'number');
+$("#text-input1").val("39.95");
+$("#text-label2").text("Lon");
+$("#text-input2").attr('type', 'number');
+$("#text-input2").val("-75.20");
+$("#number-label").text("Description");
+$("#numeric-input").attr('type', 'text');
+    L.circleMarker([parseFloat($('#text-input1').val()),parseFloat($('#text-input2').val())],
+      {color: $("#color-input").val()}).addTo(map).bindPopup($("#numeric-input").val());
 
-  // STRETCH GOALS
+/*  // STRETCH GOALS
   Task 7: Use default values - OPTIONAL
     We don't want the application to crash if our user fails to enter values for every field. Add
     whatever logic is necessary to set default values if a field is empty.
@@ -170,6 +243,7 @@ var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/ton
 // This is a popular pattern that you'll run into in programs that run jQuery. It says not to run
 // the function passed to `ready` until the HTML document is fully loaded and all scripts have
 // been interpreted. It is, therefore, an example of asynchronous behavior.
-$(document).ready(function() {
+// refer
+//$(document).ready(function() {
   // Do your stuff here
-});
+//})
